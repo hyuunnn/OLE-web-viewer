@@ -72,8 +72,11 @@ def upload():
 		title = ole_dir_list[0]
 	stream = ole.openstream(title)
         encode_data = stream.read()
-        #decode_data = BytesIO(zlib.decompress(stream.read(), -15))
-	#print(decode_data)
+	try:
+            decode_data = hexdump(BytesIO(zlib.decompress(encode_data, -15)).read())
+	except:
+	    decode_data = "zlib decode error!!"
+        #print(decode_data)
 	return render_template("result.html", title_split = title_split, filename = filename, ole_dir_list = ole_dir_list, encode_data = hexdump(encode_data), decode_data = decode_data)
     else:
         return redirect("/")
