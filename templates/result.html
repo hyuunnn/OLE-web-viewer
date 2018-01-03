@@ -28,7 +28,7 @@
 	    {% if request.args.get("encode") == "zlib" %}
 	    <textarea style="resize: none; font-family: monospace; width: 100%; height:100%">{{ encode_data }}</textarea>
 	    {% elif request.args.get("encode") == "zlib^" %}
-	    <textarea style="resize: none; font-family: monospace; width: 100%; height:100%">{{ decode_data }}</textarea>
+		<textarea style="resize: none; font-family: monospace; width: 100%; height:100%">{{ decode_data }}</textarea>
 	    {% else %}
 	    <textarea style="resize: none; font-family: monospace; width: 100%; height:100%">{{ encode_data }}</textarea>
 	    {% endif %}
@@ -46,6 +46,9 @@
 		<a href="?filename={{ filename }}&title={{ title_split }}&encode=zlib" class="list-group-item list-group-item-action">Zlib encode</a>
 		<a href="?filename={{ filename }}&title={{ title_split }}&encode=zlib^" class="list-group-item list-group-item-action">Zlib decode</a>
 		<a href="/download/encode_data" class="list-group-item list-group-item-action">Dump file</a>
+		{% endif %}
+		{% if request.args.get("title") == "PrvImage" %}
+		<img src="/static/img/image.jpg" width="100%" height="50%" />
 		{% endif %}
 	</div>
     </div>

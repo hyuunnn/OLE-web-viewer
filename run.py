@@ -42,7 +42,6 @@ def upload():
     else:
         file = 'C:\\Users\\hy00un\\Desktop\\aa\\hwp\\'
     title = request.args.get('title')
-    print(title)
     filename = ""
     if file:
         if request.method == "POST":
@@ -75,7 +74,15 @@ def upload():
         stream = ole.openstream(title)
         encode_data = stream.read()
         try:
-            hexdump_encode_data = hexdump(encode_data)
+            if request.args.get('title') == "PrvText":
+                hexdump_encode_data = encode_data.decode("utf-16")
+            elif request.args.get('title') == "PrvImage":
+                hexdump_encode_data = hexdump(encode_data)
+                f = open("./static/img/image.jpg","wb")
+                f.write(encode_data)
+                f.close()
+            else:
+                hexdump_encode_data = hexdump(encode_data)
         except:
             hexdump_encode_data = "hexdump error"
         try:
