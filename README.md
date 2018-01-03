@@ -5,7 +5,7 @@
 - 오른쪽엔 해당 값을 보여줌
 - 덤프 기능 추가
 - hex 부분 addr, hex data (32 byte or 16 byte), ascii data 형식 (O)
-- zlib encode, decode 결과 따로 보여주기 (△ 수동으로만 가능)
+- zlib encode, decode 결과 따로 보여주기 (O)
 
 ### 추가 할 점
 - PrvImage 웹 사이트에 보여주기
