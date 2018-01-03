@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, send_from_directory
 from werkzeug import secure_filename
 from io import BytesIO
 import olefile
@@ -56,6 +56,8 @@ def upload():
         encode_data = ""
         decode_data = ""
         title_split = ""
+        hexdump_encode_data = ""
+        hexdump_decode_data = ""
         for i in range(len(ole_dir)):
             ole_dir_list.append("/".join(ole_dir[i]))
             if "/" in ole_dir_list[i]:
@@ -73,13 +75,30 @@ def upload():
         stream = ole.openstream(title)
         encode_data = stream.read()
         try:
-            decode_data = hexdump(BytesIO(zlib.decompress(encode_data, -15)).read())
+            hexdump_encode_data = hexdump(encode_data)
         except:
-            decode_data = "zlib decode error!!"
+            hexdump_encode_data = "hexdump error"
+        try:
+            decode_data = BytesIO(zlib.decompress(encode_data, -15)).read()
+            hexdump_decode_data = hexdump(decode_data)
+        except:
+            hexdump_decode_data = "zlib decode error!!"
+
+        f = open(UPLOAD_FOLDER+"/"+"decode_data","wb")
+        f.write(decode_data)
+        f.close()
+
+        f = open(UPLOAD_FOLDER+"/"+"encode_data","wb")
+        f.write(encode_data)
+        f.close()
         #print(decode_data)
-        return render_template("result.html", title_split = title_split, filename = filename, ole_dir_list = ole_dir_list, encode_data = hexdump(encode_data), decode_data = decode_data)
+        return render_template("result.html", title_split = title_split, filename = filename, ole_dir_list = ole_dir_list, encode_data = hexdump_encode_data, decode_data = hexdump_decode_data)
     else:
         return redirect("/")
+
+@app.route("/download/<filename>")
+def download(filename):
+	return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',debug=True)
