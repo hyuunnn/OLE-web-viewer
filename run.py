@@ -8,7 +8,7 @@ import os
 import string
 
 ALLOWED_EXTENSIONS = set(['hwp', 'doc', 'xls'])
-UPLOAD_FOLDER = 'C:\\Users\\hy00un\\Desktop\\aa\\hwp\\'
+UPLOAD_FOLDER = 'C:\\Users\\hy00un\\Desktop\\OLE-web-viewer\\hwp\\'
 
 def hexdump(src, length=32):
     FILTER = ''.join([(len(repr(chr(x))) == 3) and chr(x) or '.' for x in range(256)])
@@ -40,7 +40,7 @@ def upload():
     if request.method == "POST":
         file = request.files['file']
     else:
-        file = 'C:\\Users\\hy00un\\Desktop\\aa\\hwp\\'
+        file = 'C:\\Users\\hy00un\\Desktop\\OLE-web-viewer\\hwp\\'
     title = request.args.get('title')
     filename = ""
     if file:
