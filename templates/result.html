@@ -9,6 +9,7 @@
     <body>
     <div class="row">
 	<div class="list-group col-2" style="padding-right:0px;">
+{% set list1 = "" %}
 	{% for i in ole_dir_list %}
 	    {% if "/" in i %}
 	      {% set length = i.split('/')|length|int-1 %}
@@ -20,8 +21,8 @@
 	      <a href="?filename={{ filename }}&title={{ list1 }}" class="list-group-item list-group-item-action active">{{ i }}</a>
 	    {% else %}
 	      <a href="?filename={{ filename }}&title={{ list1 }}" class="list-group-item list-group-item-action">{{ i }}</a>
-            {% endif %}
-        {% endfor %}
+        {% endif %}
+    {% endfor %}
         </div>
         <div class="col-8" style="padding-left:0px; padding-right:0px;">
 	    {% if request.args.get("encode") == "zlib" %}
@@ -33,13 +34,17 @@
 	    {% endif %}
 	</div>
 	<div class="list-group col-2" style="padding-left:0px; padding-right:0px;">
-	    <a href="&encode=zlib" class="list-group-item list-group-item-action">Zlib encode</a>
-		<a href="&decode=zlib^" class="list-group-item list-group-item-action">Zlib decode</a>
 		{% if request.args.get("encode") == "zlib" %}
+		<a href="?filename={{ filename }}&title={{ title_split }}&encode=zlib" class="list-group-item list-group-item-action active">Zlib encode</a>
+		<a href="?filename={{ filename }}&title={{ title_split }}&encode=zlib^" class="list-group-item list-group-item-action">Zlib decode</a>
 		<a href="/download/encode_data" class="list-group-item list-group-item-action">Dump file</a>
 		{% elif request.args.get("encode") == "zlib^" %}
+		<a href="?filename={{ filename }}&title={{ title_split }}&encode=zlib" class="list-group-item list-group-item-action">Zlib encode</a>
+		<a href="?filename={{ filename }}&title={{ title_split }}&encode=zlib^" class="list-group-item list-group-item-action active">Zlib decode</a>
 		<a href="/download/decode_data" class="list-group-item list-group-item-action">Dump file</a>
 		{% else %}
+		<a href="?filename={{ filename }}&title={{ title_split }}&encode=zlib" class="list-group-item list-group-item-action">Zlib encode</a>
+		<a href="?filename={{ filename }}&title={{ title_split }}&encode=zlib^" class="list-group-item list-group-item-action">Zlib decode</a>
 		<a href="/download/encode_data" class="list-group-item list-group-item-action">Dump file</a>
 		{% endif %}
 	</div>
