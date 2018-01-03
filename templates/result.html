@@ -39,6 +39,8 @@
 		<a href="/download/encode_data" class="list-group-item list-group-item-action">Dump file</a>
 		{% elif request.args.get("encode") == "zlib^" %}
 		<a href="/download/decode_data" class="list-group-item list-group-item-action">Dump file</a>
+		{% else %}
+		<a href="/download/encode_data" class="list-group-item list-group-item-action">Dump file</a>
 		{% endif %}
 	</div>
     </div>
