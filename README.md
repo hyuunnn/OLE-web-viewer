@@ -19,5 +19,5 @@
 
 
 ### maximum
-- Made for personal use.
-- Maybe There will be a vulnerability in the code.
+- Made for personal use
+- Maybe There will be a vulnerability in the code
