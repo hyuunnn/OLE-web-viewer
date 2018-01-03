@@ -9,6 +9,12 @@
 - PrvImage 웹 사이트에 보여주기
 - PrvText 보여주기
 
+### how to use
+- Python 2.7
+- pip install olefile, flask
+- Edit path of run.py
+- python run.py
+
 ### 추가 할 점
 - 업로드 기능(드래그를 이용한 방법(dropzonejs))
 - 최적화 생각해보기
